@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.technipixl.exo1.databinding.FragmentComicsBinding
+import com.technipixl.exo1.network.Character
+import com.technipixl.exo1.network.ItemList
 import com.technipixl.exo1.network.MarvelServiceImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,16 +36,24 @@ class ComicsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = MarvelService.getCharacterDetail(args.characterId)
             withContext(Dispatchers.Main) {
+                val comicsList = response.body()?.data?.results?.get(0)?.comics?.items ?: emptyList()
+                setupRecyclerView(comicsList)
                 val characterDetail = response.body()?.data?.results
                 // Affichage nom
                 binding?.titleView?.text = characterDetail?.get(0)?.name
                 // Affichage image
                 val thumb = characterDetail?.get(0)?.thumbnail
                 setupImage(thumb?.path + "." + thumb?.extension)
+
+                //val comic = characterDetail?.get(0)?.comics
             }
         }
     }
-
+    private fun setupRecyclerView(itemList: List<ItemList>) {
+        val recyclerView = binding?.comicsRecyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter = ComicsAdapter(itemList)
+    }
     private fun setupImage(url: String) {
         Picasso.get()
             .load(url)
