@@ -13,10 +13,10 @@ data class CharacterDetail(
     val id: String,
     val name: String,
     val thumbnail: ThumbnailDetail,
-    val comics: List<Items>
+    //val comics: List<Items>
 )
-
+/*
 data class  Items(
     val resourceURI: String,
     val name: String
-)
+)*/
