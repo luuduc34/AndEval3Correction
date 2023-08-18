@@ -33,8 +33,11 @@ class ComicsFragment : Fragment() {
             val response = MarvelService.getCharacterDetail(args.characterId)
             withContext(Dispatchers.Main) {
                 val characterDetail = response.body()?.data?.results
+                // Affichage nom
                 binding?.titleView?.text = characterDetail?.get(0)?.name
-                characterDetail?.get(0)?.thumbnail?.let { setupImage(it.path + "." + it.extension) }
+                // Affichage image
+                val thumb = characterDetail?.get(0)?.thumbnail
+                setupImage(thumb?.path + "." + thumb?.extension)
             }
         }
     }
