@@ -24,7 +24,8 @@
         android:background="@color/marvelRed"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:padding="10dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/titleImageView"
         app:layout_constraintEnd_toEndOf="@+id/titleImageView"/>
 
