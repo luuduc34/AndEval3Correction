@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.technipixl.exo1.databinding.FragmentComicsBinding
-import com.technipixl.exo1.network.Character
 import com.technipixl.exo1.network.ItemList
 import com.technipixl.exo1.network.MarvelServiceImpl
 import kotlinx.coroutines.CoroutineScope
@@ -36,16 +35,16 @@ class ComicsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = MarvelService.getCharacterDetail(args.characterId)
             withContext(Dispatchers.Main) {
-                val comicsList = response.body()?.data?.results?.get(0)?.comics?.items ?: emptyList()
-                setupRecyclerView(comicsList)
-                val characterDetail = response.body()?.data?.results
+
+                val comicsDetail = response.body()?.data?.results
                 // Affichage nom
-                binding?.titleView?.text = characterDetail?.get(0)?.name
+                binding?.titleView?.text = comicsDetail?.get(0)?.name
                 // Affichage image
-                val thumb = characterDetail?.get(0)?.thumbnail
+                val thumb = comicsDetail?.get(0)?.thumbnail
                 setupImage(thumb?.path + "." + thumb?.extension)
 
-                //val comic = characterDetail?.get(0)?.comics
+                val comicsList = response.body()?.data?.results?.get(0)?.comics?.items ?: emptyList()
+                setupRecyclerView(comicsList)
             }
         }
     }

@@ -1,7 +1,5 @@
 package com.technipixl.exo1
 
-
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.technipixl.exo1.databinding.CellBinding

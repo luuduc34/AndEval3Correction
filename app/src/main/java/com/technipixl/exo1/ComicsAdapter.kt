@@ -3,7 +3,6 @@ package com.technipixl.exo1
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.technipixl.exo1.databinding.CellBinding
 import com.technipixl.exo1.databinding.CellComicsBinding
 import com.technipixl.exo1.network.ItemList
 

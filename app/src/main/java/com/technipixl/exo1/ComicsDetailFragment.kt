@@ -7,11 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.technipixl.exo1.databinding.FragmentComicsDetailBinding
-import com.technipixl.exo1.network.MarvelServiceImpl
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ComicsDetailFragment : Fragment() {
 
