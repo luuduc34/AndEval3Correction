@@ -1,6 +1,9 @@
 package com.technipixl.exo1.network
 
 import com.technipixl.exo1.HashGenerator
+import com.technipixl.exo1.network.character.MarvelResponse
+import com.technipixl.exo1.network.comics.MarvelDetailResponse
+import com.technipixl.exo1.network.comicsDetail.ComicsDetailResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -15,8 +18,6 @@ class MarvelServiceImpl {
     val publicKey = "e56e66cc068a53647f3a85b2f9bbed37"
     val hashExample = HashGenerator.generateHash(timeStamp, privateKey, publicKey)
     val limit: String = "100"
-    //val id: Long = 1010699
-
     fun getRetrofit(): Retrofit {
         val okBuilder = OkHttpClient().newBuilder().apply {
             connectTimeout(15, TimeUnit.SECONDS)
@@ -31,5 +32,7 @@ class MarvelServiceImpl {
             .build()
     }
     suspend fun getCharacter(): Response<MarvelResponse> = getRetrofit().create(MarvelServices::class.java).characterList(publicKey, timeStamp.toString(), hashExample.toString(), limit)
-    suspend fun getCharacterDetail(id: Long): Response<MarvelDetailResponse> = getRetrofit().create(MarvelServices::class.java).characterDetailList(id, publicKey, timeStamp.toString(), hashExample.toString())
+    suspend fun getCharacterDetail(id: Long): Response<MarvelDetailResponse> = getRetrofit().create(
+        MarvelServices::class.java).characterDetailList(id, publicKey, timeStamp.toString(), hashExample.toString())
+    suspend fun getComicsCharacterDetail(id: String): Response<ComicsDetailResponse> = getRetrofit().create(MarvelServices::class.java).comicsDetail(id, publicKey, timeStamp.toString(), hashExample.toString())
 }

@@ -1,10 +1,10 @@
-package com.technipixl.exo1
+package com.technipixl.exo1.character
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.technipixl.exo1.databinding.CellBinding
-import com.technipixl.exo1.network.Character
+import com.technipixl.exo1.network.character.Character
 
 class CharacterAdapter(private var data: List<Character>, val onItemClick: (Character)->Unit) : RecyclerView.Adapter<CharacterViewHolder> () {
     private lateinit var binding: CellBinding

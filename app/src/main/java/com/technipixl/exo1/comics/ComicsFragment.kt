@@ -1,16 +1,17 @@
-package com.technipixl.exo1
+package com.technipixl.exo1.comics
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.technipixl.exo1.databinding.FragmentComicsBinding
-import com.technipixl.exo1.network.ItemList
+import com.technipixl.exo1.network.comics.ItemList
 import com.technipixl.exo1.network.MarvelServiceImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,9 @@ class ComicsFragment : Fragment() {
     ): View? {
         binding = FragmentComicsBinding.inflate(layoutInflater, container, false)
         getCharacterAsync()
+        binding?.backBtn?.setOnClickListener{
+            findNavController().navigateUp()
+        }
         return binding?.root
     }
 
@@ -51,7 +55,13 @@ class ComicsFragment : Fragment() {
     private fun setupRecyclerView(itemList: List<ItemList>) {
         val recyclerView = binding?.comicsRecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter = ComicsAdapter(itemList)
+        recyclerView?.adapter = ComicsAdapter(itemList){
+                items -> goToDetail(items)
+        }
+    }
+    private fun goToDetail(comics: ItemList) {
+        val direction = ComicsFragmentDirections.actionComicsFragmentToComicsDetailFragment(comics.resourceURI)
+        findNavController().navigate(direction)
     }
     private fun setupImage(url: String) {
         Picasso.get()

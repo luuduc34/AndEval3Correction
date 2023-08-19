@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/charactersFragment"
-        android:name="com.technipixl.exo1.CharactersFragment"
+        android:name="com.technipixl.exo1.character.CharactersFragment"
         android:label="fragment_characters"
         tools:layout="@layout/fragment_characters" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"
-        android:name="com.technipixl.exo1.ComicsFragment"
+        android:name="com.technipixl.exo1.comics.ComicsFragment"
         android:label="fragment_comics"
         tools:layout="@layout/fragment_comics" >
         <action

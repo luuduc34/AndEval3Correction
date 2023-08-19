@@ -1,4 +1,4 @@
-package com.technipixl.exo1.network
+package com.technipixl.exo1.network.character
 
 data class MarvelResponse(
     val data: DataResponse

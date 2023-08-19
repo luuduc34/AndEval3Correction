@@ -1,4 +1,4 @@
-package com.technipixl.exo1
+package com.technipixl.exo1.character
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.technipixl.exo1.databinding.FragmentCharactersBinding
-import com.technipixl.exo1.network.Character
+import com.technipixl.exo1.network.character.Character
 import com.technipixl.exo1.network.MarvelServiceImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,6 @@ class CharactersFragment : Fragment() {
         binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
         getCharacterAsync()
         return binding?.root
-
     }
     private fun getCharacterAsync() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -37,7 +36,6 @@ class CharactersFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 val characterList = response.body()?.data?.results ?: emptyList()
                 setupRecyclerView(characterList)
-
             }
         }
     }
@@ -46,7 +44,6 @@ class CharactersFragment : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView?.adapter = CharacterAdapter(characterList){
                 character -> goToDetail(character)
-
         }
     }
 

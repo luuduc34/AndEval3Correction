@@ -1,4 +1,4 @@
-package com.technipixl.exo1.network
+package com.technipixl.exo1.network.comics
 
 data class MarvelDetailResponse (
     val data: DataDetailResponse
@@ -18,8 +18,6 @@ data class ThumbnailDetail(
 )
 
 data class  Items(
-    val available: String,
-    val collectionURI: String,
     val items: List<ItemList>
 )
 
